@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Borehole Man | Cape Town Borehole Drilling &amp; Services</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1e2260;
+      --navy-dark: #13174a;
+      --navy-mid: #2a2f7a;
+      --grey: #7a7f96;
+      --grey-light: #a0a4b8;
+      --sand: #f4f5f9;
+      --white: #ffffff;
+      --text: #1a1d3a;
+      --muted: #6b6f88;
+      --accent: #1e2260;
+      --accent-light: #3a4099;
+      --border: #dcdee8;
+      --highlight: #5b5f9e;
+    }
+
+    html { scroll-behavior: smooth; }
+    body { font-family: 'DM Sans', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0.85rem 5%;
+      background: rgba(19, 23, 74, 0.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .logo-wrap { display: flex; align-items: center; cursor: pointer; }
+    .logo-wrap img { height: 44px; width: auto; display: block; filter: brightness(0) invert(1); }
+    .nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+    .nav-links a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; cursor: pointer; }
+    .nav-links a:hover { color: #a0a4cc; }
+    .nav-cta { background: var(--white); color: var(--navy); padding: 0.55rem 1.4rem; border-radius: 6px; font-weight: 700; font-size: 0.88rem; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+    .nav-cta:hover { background: #e8e9f5; color: var(--navy) !important; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 2px; background: white; border-radius: 2px; }
+
+    /* PAGE SYSTEM */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* HERO */
+    #home {
+      min-height: 100vh;
+      background: linear-gradient(140deg, var(--navy-dark) 0%, var(--navy) 55%, var(--navy-mid) 100%);
+      display: flex; align-items: center;
+      position: relative; overflow: hidden;
+      padding: 8rem 5% 5rem;
+    }
+    .hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+    .hero-line {
+      position: absolute;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(160,164,204,0.4), transparent);
+    }
+    .hero-line-1 { width: 70%; top: 38%; left: -10%; transform: rotate(-6deg); }
+    .hero-line-2 { width: 50%; top: 60%; left: 30%; transform: rotate(-6deg); opacity: 0.4; }
+    .hero-circle-1 { position: absolute; width: 500px; height: 500px; border-radius: 50%; border: 1px solid rgba(160,164,204,0.12); top: -100px; right: -80px; }
+    .hero-circle-2 { position: absolute; width: 300px; height: 300px; border-radius: 50%; border: 1px solid rgba(160,164,204,0.08); bottom: 60px; left: 5%; }
+    .hero-dot { position: absolute; width: 60px; height: 60px; border-radius: 50%; background: rgba(160,164,204,0.12); border: 2px solid rgba(160,164,204,0.25); }
+    .hero-dot-1 { top: 38%; right: 22%; }
+    .hero-dot-2 { top: 38%; right: 22%; transform: scale(0.35); background: rgba(160,164,204,0.4); }
+
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .hero-logo-big { margin-bottom: 2.5rem; animation: fadeUp 0.5s ease both; }
+    .hero-logo-big img { height: 70px; width: auto; filter: brightness(0) invert(1); }
+    .hero-tagline {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.2);
+      color: rgba(255,255,255,0.9); padding: 0.45rem 1.1rem; border-radius: 50px;
+      font-size: 0.88rem; font-weight: 600; letter-spacing: 0.04em;
+      margin-bottom: 1.8rem; font-style: italic;
+      animation: fadeUp 0.5s 0.05s ease both;
+    }
+    .hero-content h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.4rem, 5vw, 3.8rem); font-weight: 800; color: var(--white); line-height: 1.1; margin-bottom: 1.4rem; animation: fadeUp 0.5s 0.1s ease both; }
+    .hero-content h1 span { color: #a0a4cc; }
+    .hero-content p { font-size: 1.08rem; color: rgba(255,255,255,0.7); line-height: 1.75; margin-bottom: 2.4rem; animation: fadeUp 0.5s 0.15s ease both; max-width: 560px; }
+    .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; animation: fadeUp 0.5s 0.2s ease both; }
+    .btn-primary { background: var(--white); color: var(--navy); padding: 0.9rem 2rem; border-radius: 8px; font-weight: 700; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; border: none; font-family: 'DM Sans', sans-serif; }
+    .btn-primary:hover { background: #e8e9f5; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+    .btn-outline { border: 2px solid rgba(255,255,255,0.3); color: var(--white); padding: 0.9rem 2rem; border-radius: 8px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; display: inline-flex; align-items: center; gap: 0.5rem; cursor: pointer; background: none; font-family: 'DM Sans', sans-serif; }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.07); }
+    .hero-stats { position: relative; z-index: 2; margin-top: 4rem; display: flex; gap: 3rem; animation: fadeUp 0.5s 0.25s ease both; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,0.12); }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 800; color: var(--white); line-height: 1; }
+    .stat-label { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.3rem; text-transform: uppercase; letter-spacing: 0.06em; }
+    .wave-divider { line-height: 0; }
+    .wave-divider svg { display: block; width: 100%; }
+    @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+
+    /* SHARED */
+    section { padding: 6rem 5%; }
+    .section-label { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--highlight); margin-bottom: 0.75rem; }
+    .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 800; color: var(--navy); line-height: 1.15; }
+    .section-title span { color: var(--highlight); }
+    .section-intro { color: var(--muted); font-size: 1.02rem; line-height: 1.75; max-width: 580px; margin-top: 0.8rem; }
+
+    /* SERVICES */
+    #services { background: var(--sand); }
+    .services-header { text-align: center; margin-bottom: 3.5rem; }
+    .services-header .section-intro { margin: 0.8rem auto 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+    .service-card { background: var(--white); border-radius: 14px; padding: 2.2rem 2rem; border: 1px solid var(--border); transition: all 0.3s; position: relative; overflow: hidden; cursor: pointer; }
+    .service-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--navy), var(--highlight)); transform: scaleX(0); transform-origin: left; transition: transform 0.3s; }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 16px 36px rgba(30,34,96,0.1); }
+    .service-card:hover::after { transform: scaleX(1); }
+    .service-icon { width: 50px; height: 50px; border-radius: 12px; background: linear-gradient(135deg, var(--navy), var(--highlight)); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 1.3rem; }
+    .service-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 700; color: var(--navy); margin-bottom: 0.65rem; }
+    .service-card p { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+    .card-link { display: inline-flex; align-items: center; gap: 0.3rem; margin-top: 1rem; font-size: 0.84rem; font-weight: 600; color: var(--highlight); }
+
+    /* ABOUT */
+    #about { background: var(--white); }
+    .about-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-visual { position: relative; }
+    .about-img-box { background: linear-gradient(135deg, var(--navy-dark), var(--navy-mid)); border-radius: 20px; padding: 3.5rem 2.5rem; text-align: center; color: white; }
+    .about-img-box img { height: 60px; width: auto; filter: brightness(0) invert(1); margin-bottom: 1.5rem; display: block; margin-left: auto; margin-right: auto; }
+    .about-img-box p { font-size: 1.05rem; opacity: 0.8; font-style: italic; line-height: 1.65; }
+    .about-badge-float { position: absolute; bottom: -1.5rem; right: -1.5rem; background: var(--navy); color: white; border-radius: 14px; padding: 1.2rem 1.5rem; text-align: center; font-weight: 700; box-shadow: 0 8px 24px rgba(30,34,96,0.3); }
+    .about-badge-float .num { font-family: 'Playfair Display', serif; font-size: 2rem; display: block; color: #a0a4cc; }
+    .about-badge-float .lbl { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: rgba(255,255,255,0.6); }
+    .about-list { margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+    .about-item { display: flex; align-items: flex-start; gap: 1rem; }
+    .about-check { width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; color: white; font-size: 0.75rem; margin-top: 2px; }
+    .about-item p { color: var(--text); font-size: 0.95rem; line-height: 1.65; }
+    .projects-grid { margin-top: 2.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .proj-item { background: var(--sand); border-radius: 10px; padding: 1rem 1.2rem; border-left: 3px solid var(--navy); }
+    .proj-item strong { display: block; font-size: 0.84rem; color: var(--navy); font-weight: 700; margin-bottom: 0.25rem; }
+    .proj-item span { font-size: 0.79rem; color: var(--muted); }
+
+    /* WHY */
+    #why { background: var(--navy-dark); padding: 5rem 5%; }
+    .why-inner { text-align: center; }
+    .why-inner .section-label { color: #a0a4cc; }
+    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; margin-top: 3.5rem; }
+    .why-card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.09); border-radius: 14px; padding: 2rem 1.5rem; text-align: center; transition: all 0.3s; }
+    .why-card:hover { background: rgba(255,255,255,0.08); border-color: rgba(160,164,204,0.4); }
+    .why-card .icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+    .why-card h4 { font-family: 'Playfair Display', serif; color: var(--white); font-size: 1.1rem; margin-bottom: 0.5rem; }
+    .why-card p { color: rgba(255,255,255,0.5); font-size: 0.87rem; line-height: 1.6; }
+
+    /* CONTACT */
+    #contact { background: var(--sand); }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: start; }
+    .contact-methods { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.3rem; }
+    .contact-method { display: flex; align-items: center; gap: 1rem; }
+    .method-icon { width: 46px; height: 46px; flex-shrink: 0; border-radius: 12px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 1.1rem; }
+    .method-text strong { display: block; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 0.2rem; }
+    .method-text a, .method-text span { color: var(--navy); font-weight: 600; text-decoration: none; font-size: 0.97rem; }
+    .method-text a:hover { color: var(--highlight); }
+    .contact-form-box { background: var(--white); border-radius: 20px; padding: 2.5rem; border: 1px solid var(--border); }
+    .contact-form-box h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 1.8rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.2rem; }
+    .form-group label { font-size: 0.8rem; font-weight: 600; color: var(--text); text-transform: uppercase; letter-spacing: 0.06em; }
+    .form-group input, .form-group select, .form-group textarea { padding: 0.75rem 1rem; border-radius: 8px; border: 1.5px solid var(--border); font-family: 'DM Sans', sans-serif; font-size: 0.93rem; color: var(--text); background: var(--sand); transition: border-color 0.2s; outline: none; resize: vertical; }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--navy); background: white; }
+    .form-submit { width: 100%; padding: 1rem; background: var(--navy); color: white; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700; cursor: pointer; transition: all 0.2s; }
+    .form-submit:hover { background: var(--navy-mid); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(30,34,96,0.25); }
+
+    /* DETAIL HERO */
+    .detail-hero { background: linear-gradient(140deg, var(--navy-dark) 0%, var(--navy) 100%); padding: 8rem 5% 4rem; }
+    .back-btn { display: inline-flex; align-items: center; gap: 0.5rem; color: #a0a4cc; font-size: 0.88rem; font-weight: 600; cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; margin-bottom: 2rem; transition: color 0.2s; }
+    .back-btn:hover { color: white; }
+    .detail-hero .section-label { color: #a0a4cc; }
+    .detail-hero .section-title { color: white; }
+    .detail-hero .section-title span { color: #a0a4cc; }
+    .detail-hero .section-intro { color: rgba(255,255,255,0.65); max-width: 640px; }
+    .detail-body { padding: 5rem 5%; background: var(--white); }
+
+    /* STEPS */
+    .steps-container { max-width: 800px; }
+    .step-block { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; margin-bottom: 3rem; position: relative; }
+    .step-block:not(:last-child)::before { content: ''; position: absolute; left: 39px; top: 72px; bottom: -3rem; width: 2px; background: linear-gradient(to bottom, rgba(30,34,96,0.3), transparent); }
+    .step-num-col { display: flex; flex-direction: column; align-items: center; }
+    .step-num { width: 58px; height: 58px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 800; color: white; flex-shrink: 0; }
+    .step-tag { font-size: 0.66rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--highlight); margin-top: 0.5rem; text-align: center; }
+    .step-content { padding-top: 0.6rem; }
+    .step-content h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 800; color: var(--navy); margin-bottom: 0.8rem; }
+    .step-content p { color: var(--text); font-size: 0.96rem; line-height: 1.78; margin-bottom: 0.8rem; }
+    .step-content p:last-child { margin-bottom: 0; }
+    .step-critical { background: #f0f1fa; border: 1px solid #c5c8e8; border-left: 4px solid var(--navy); border-radius: 10px; padding: 1rem 1.2rem; margin-top: 1rem; font-size: 0.9rem; color: var(--text); line-height: 1.65; }
+    .step-critical strong { color: var(--navy); }
+
+    /* MAINTENANCE */
+    .service-items-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2.5rem; max-width: 900px; }
+    .service-item-card { background: var(--sand); border-radius: 14px; padding: 1.8rem; border: 1px solid var(--border); }
+    .service-item-card .item-icon { font-size: 1.7rem; margin-bottom: 0.8rem; display: block; }
+    .service-item-card h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.45rem; }
+    .service-item-card p { font-size: 0.89rem; color: var(--muted); line-height: 1.65; }
+    .frequency-box { margin-top: 3rem; max-width: 800px; background: var(--navy); border-radius: 16px; padding: 2.2rem 2.5rem; display: flex; align-items: center; gap: 2rem; }
+    .freq-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .freq-text h4 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: white; margin-bottom: 0.4rem; }
+    .freq-text p { font-size: 0.92rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+    /* WATER STORAGE */
+    .storage-intro-text p { font-size: 1.04rem; color: var(--text); line-height: 1.78; margin-bottom: 1rem; max-width: 800px; }
+    .storage-list { margin-top: 3rem; max-width: 800px; }
+    .storage-list h3 { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: var(--navy); margin-bottom: 1.5rem; }
+    .storage-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+    .storage-item:last-child { border-bottom: none; }
+    .storage-bullet { width: 34px; height: 34px; flex-shrink: 0; border-radius: 8px; background: var(--navy); display: flex; align-items: center; justify-content: center; font-size: 0.95rem; margin-top: 2px; }
+    .storage-item-text strong { display: block; color: var(--navy); font-weight: 600; margin-bottom: 0.2rem; font-size: 0.96rem; }
+    .storage-item-text span { color: var(--muted); font-size: 0.89rem; line-height: 1.6; }
+    .storage-closer { max-width: 800px; margin-top: 3rem; background: var(--sand); border-radius: 14px; padding: 2rem; border-left: 4px solid var(--navy); }
+    .storage-closer p { font-size: 0.96rem; color: var(--text); line-height: 1.75; }
+
+    /* FOOTER */
+    footer { background: var(--navy-dark); padding: 3rem 5%; border-top: 1px solid rgba(255,255,255,0.07); }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; }
+    .footer-logo img { height: 36px; width: auto; filter: brightness(0) invert(1); opacity: 0.8; }
+    .footer-tagline { font-style: italic; color: rgba(255,255,255,0.4); font-size: 0.82rem; margin-top: 0.3rem; }
+    .footer-links { display: flex; flex-direction: column; gap: 0.35rem; text-align: right; }
+    .footer-links a { color: rgba(255,255,255,0.45); font-size: 0.83rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #a0a4cc; }
+    .footer-copy { width: 100%; text-align: center; color: rgba(255,255,255,0.25); font-size: 0.78rem; margin-top: 1.5rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); }
+
+    /* MOBILE */
+    @media (max-width: 900px) {
+      .about-inner, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-visual { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+      .frequency-box { flex-direction: column; gap: 1rem; text-align: center; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { text-align: center; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--navy-dark); flex-direction: column; padding: 2rem; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); }
+      .nav-links.open { display: flex; }
+      .hamburger { display: flex; }
+      .hero-stats { gap: 1.8rem; flex-wrap: wrap; }
+      .projects-grid { grid-template-columns: 1fr; }
+      section { padding: 4rem 5%; }
+      .step-block { grid-template-columns: 60px 1fr; gap: 1.2rem; }
+      .step-num { width: 46px; height: 46px; font-size: 1.1rem; }
+      .step-block::before { left: 22px; }
+      .hero-logo-big img { height: 52px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="logo-wrap" onclick="showPage('main')">
+      <img src="logo.jpeg" alt="Borehole Man" />
+    </div>
+    <ul class="nav-links" id="navLinks">
+      <li><a onclick="showPage('main'); goTo('home')">Home</a></li>
+      <li><a onclick="showPage('main'); goTo('services')">Services</a></li>
+      <li><a onclick="showPage('main'); goTo('about')">About Us</a></li>
+      <li><a onclick="showPage('main'); goTo('contact')">Contact</a></li>
+      <li><a href="tel:0822100454" class="nav-cta">Call Us</a></li>
+    </ul>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+  <!-- ===== MAIN PAGE ===== -->
+  <div class="page active" id="page-main">
+
+    <section id="home">
+      <div class="hero-bg">
+        <div class="hero-line hero-line-1"></div>
+        <div class="hero-line hero-line-2"></div>
+        <div class="hero-circle-1"></div>
+        <div class="hero-circle-2"></div>
+        <div class="hero-dot hero-dot-1"></div>
+        <div class="hero-dot hero-dot-2"></div>
+      </div>
+      <div class="hero-content">
+        <div class="hero-logo-big">
+          <img src="logo.jpeg" alt="Borehole Man" />
+        </div>
+        <div class="hero-tagline">&#8220;We do the &ldquo;hole&rdquo; job&#8221;</div>
+        <h1>Cape Town's Trusted<br/><span>Borehole Specialists</span></h1>
+        <p>Professional borehole drilling, pump installation, maintenance, and water storage systems. One complete solution for your water independence. Serving the Southern Suburbs for 20+ years.</p>
+        <div class="hero-actions">
+          <button class="btn-primary" onclick="goTo('contact')">Get a Free Quote &rarr;</button>
+          <button class="btn-outline" onclick="goTo('services')">Our Services</button>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><div class="stat-num">20+</div><div class="stat-label">Years Drilling</div></div>
+          <div class="stat"><div class="stat-num">100s</div><div class="stat-label">Boreholes Drilled</div></div>
+          <div class="stat"><div class="stat-num">1</div><div class="stat-label">Stop Shop</div></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="wave-divider" style="background:var(--navy-dark)">
+      <svg viewBox="0 0 1440 60" preserveAspectRatio="none" height="60" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#f4f5f9"/>
+      </svg>
+    </div>
+
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="services-header">
+        <div class="section-label">What We Do</div>
+        <h2 class="section-title">Complete <span>Borehole Solutions</span></h2>
+        <p class="section-intro">From the first drill to ongoing maintenance, we handle everything so you can enjoy reliable, independent water supply.</p>
+      </div>
+      <div class="services-grid">
+        <div class="service-card" onclick="showPage('drilling')">
+          <div class="service-icon">&#128297;</div>
+          <h3>Borehole Drilling</h3>
+          <p>Domestic and commercial borehole drilling throughout the Southern Suburbs and greater Cape Town region. Experienced in all Western Cape drilling conditions.</p>
+          <span class="card-link">How drilling works &rarr;</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#9881;&#65039;</div>
+          <h3>Pump Installation</h3>
+          <p>Supply and installation of borehole pumps, booster pumps, and all associated electrical switchgear. Full pump solutions tailored to your water needs.</p>
+        </div>
+        <div class="service-card" onclick="showPage('maintenance')">
+          <div class="service-icon">&#128295;</div>
+          <h3>Borehole Maintenance</h3>
+          <p>Annual servicing keeps your system running efficiently and prevents small issues from turning into expensive repairs.</p>
+          <span class="card-link">What a service includes &rarr;</span>
+        </div>
+        <div class="service-card" onclick="showPage('waterstorage')">
+          <div class="service-icon">&#129295;</div>
+          <h3>Water Storage Systems</h3>
+          <p>Complete water storage solutions including tanks, booster pumps, and all pipework. We design systems that keep clean water flowing around the clock.</p>
+          <span class="card-link">Full system details &rarr;</span>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#129516;</div>
+          <h3>Water Quality Testing</h3>
+          <p>We monitor and test water quality, identify inconsistencies such as cloudiness or iron content, and take action before problems affect your system.</p>
+        </div>
+        <div class="service-card">
+          <div class="service-icon">&#127807;</div>
+          <h3>Irrigation Systems</h3>
+          <p>Irrigation design and installation using borehole water. Ideal for estates, golf courses, farms, and large residential properties.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="about-inner">
+        <div class="about-visual">
+          <div class="about-img-box">
+            <img src="logo.jpeg" alt="Borehole Man" />
+            <p>"We inform the client of progress at all times and help them make the best decision."</p>
+          </div>
+          <div class="about-badge-float">
+            <span class="num">20+</span>
+            <span class="lbl">Years of Excellence</span>
+          </div>
+        </div>
+        <div class="about-content">
+          <div class="section-label">About Us</div>
+          <h2 class="section-title">Southern Suburbs' <span>Borehole Experts</span></h2>
+          <p class="section-intro">We have been drilling domestic boreholes in the Southern Suburbs of Cape Town for over 20 years. Our upfront, transparent approach means you're always informed and in control.</p>
+          <div class="about-list">
+            <div class="about-item">
+              <div class="about-check">&#10003;</div>
+              <p>Experienced in all Western Cape drilling conditions. Cape Town is known for encountering every possible condition in a single borehole.</p>
+            </div>
+            <div class="about-item">
+              <div class="about-check">&#10003;</div>
+              <p>Transparent client relationships. We keep you informed at every step and present all options so you can make confident decisions.</p>
+            </div>
+            <div class="about-item">
+              <div class="about-check">&#10003;</div>
+              <p>A true one-stop shop. Drilling, pump, storage, electrical, and irrigation all handled by one trusted team.</p>
+            </div>
+          </div>
+          <div class="projects-grid">
+            <div class="proj-item"><strong>Dept. of Agriculture</strong><span>Cedarberg, strong yielding boreholes in difficult conditions</span></div>
+            <div class="proj-item"><strong>Chapman's Peak</strong><span>Catch net holes drilled against the mountainside</span></div>
+            <div class="proj-item"><strong>Univ. of Western Cape</strong><span>23 mini boreholes + 4 x 30m monitoring boreholes</span></div>
+            <div class="proj-item"><strong>Sunset Links Golf Estate</strong><span>Milnerton, 6 boreholes with irrigation pump systems</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WHY -->
+    <section id="why">
+      <div class="why-inner">
+        <div class="section-label" style="color:#a0a4cc">Why Borehole Man</div>
+        <h2 class="section-title" style="color:white">Why Clients <span style="color:#a0a4cc">Choose Us</span></h2>
+        <div class="why-grid">
+          <div class="why-card"><span class="icon">&#127942;</span><h4>20+ Years Experience</h4><p>Two decades of drilling across the Southern Suburbs and wider Western Cape region.</p></div>
+          <div class="why-card"><span class="icon">&#128172;</span><h4>Transparent Communication</h4><p>We keep you informed at every step and present every option clearly. No surprises.</p></div>
+          <div class="why-card"><span class="icon">&#128295;</span><h4>Full-Service Team</h4><p>Drilling, pump installation, storage, electrical, and irrigation. One team, zero hassle.</p></div>
+          <div class="why-card"><span class="icon">&#128205;</span><h4>Cape Town Local</h4><p>We know the Western Cape geology inside out. We can drill under any condition.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="contact-inner">
+        <div class="contact-info">
+          <div class="section-label">Get In Touch</div>
+          <h2 class="section-title">Ready for <span>Your Borehole?</span></h2>
+          <p class="section-intro">Get in touch today for a free consultation. We'll assess your property and recommend the best solution for your water needs.</p>
+          <div class="contact-methods">
+            <div class="contact-method">
+              <div class="method-icon">&#128222;</div>
+              <div class="method-text"><strong>Office</strong><a href="tel:0822100454">082 210 0454</a></div>
+            </div>
+            <div class="contact-method">
+              <div class="method-icon">&#128101;</div>
+              <div class="method-text"><strong>Dusty (Owner)</strong><a href="tel:0798459030">079 845 9030</a></div>
+            </div>
+            <div class="contact-method">
+              <div class="method-icon">&#9993;&#65039;</div>
+              <div class="method-text"><strong>Email</strong><a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a></div>
+            </div>
+            <div class="contact-method">
+              <div class="method-icon">&#128205;</div>
+              <div class="method-text"><strong>Location</strong><span>Tokai, Cape Town, South Africa</span></div>
+            </div>
+            <div class="contact-method">
+              <div class="method-icon">&#128336;</div>
+              <div class="method-text"><strong>Service Area</strong><span>Southern Suburbs &amp; Greater Cape Town</span></div>
+            </div>
+          </div>
+        </div>
+        <div class="contact-form-box">
+          <h3>Request a Free Quote</h3>
+          <div class="form-row">
+            <div class="form-group"><label>First Name</label><input type="text" placeholder="John"/></div>
+            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Smith"/></div>
+          </div>
+          <div class="form-group"><label>Email Address</label><input type="email" placeholder="john@example.com"/></div>
+          <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="082 XXX XXXX"/></div>
+          <div class="form-group">
+            <label>Service Required</label>
+            <select>
+              <option value="">Select a service...</option>
+              <option>Borehole Drilling</option>
+              <option>Pump Installation</option>
+              <option>Borehole Maintenance</option>
+              <option>Water Storage System</option>
+              <option>Irrigation System</option>
+              <option>Water Quality Testing</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Message</label><textarea rows="4" placeholder="Tell us about your property and water needs..."></textarea></div>
+          <button class="form-submit" onclick="handleSubmit(this)">Send Enquiry &rarr;</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="logo.jpeg" alt="Borehole Man" /></div>
+          <div class="footer-tagline">"We do the &ldquo;hole&rdquo; job"</div>
+        </div>
+        <div class="footer-links">
+          <a href="tel:0822100454">082 210 0454 (Office)</a>
+          <a href="tel:0798459030">079 845 9030 (Dusty)</a>
+          <a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a>
+          <span style="color:rgba(255,255,255,0.3); font-size:0.82rem;">Tokai, Cape Town</span>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2025 Borehole Man. All rights reserved. Serving Cape Town's Southern Suburbs for 20+ years.</div>
+    </footer>
+  </div>
+
+
+  <!-- ===== DRILLING PAGE ===== -->
+  <div class="page" id="page-drilling">
+    <div class="detail-hero">
+      <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
+      <div class="section-label">Borehole Drilling</div>
+      <h1 class="section-title">How the <span>Drilling Process</span> Works</h1>
+      <p class="section-intro">Drilling a borehole is a detailed process that takes careful planning and the right equipment. Here's exactly what happens on your property from start to finish, explained in plain language.</p>
+    </div>
+    <div class="detail-body">
+      <div class="steps-container">
+        <div class="step-block">
+          <div class="step-num-col"><div class="step-num">1</div><span class="step-tag">Setup</span></div>
+          <div class="step-content">
+            <h3>Rig Setup</h3>
+            <p>Our team arrives and sets up the drilling rig and equipment on your property. This typically takes up to half a day. We'll dig small flow pits alongside the rig to collect water and debris during drilling.</p>
+          </div>
+        </div>
+        <div class="step-block">
+          <div class="step-num-col"><div class="step-num">2</div></div>
+          <div class="step-content">
+            <h3>Drilling Through the Top Layer</h3>
+            <p>In the Cape Peninsula, the ground surface is made up of sand, clay and loose gravel, which means we start with a specialist technique called Rotary Mud Drilling (RMD). We flush water down the hole as we drill, which carries the debris back up to the surface and prevents the hole from collapsing. A chemical is added to the water to help with this.</p>
+            <p>If water is found during this stage, we'll case (line) the hole with a strong PVC sleeve. The bottom portion of this sleeve is slotted to allow water to flow in, while keeping sand and clay out. We always drill a bit deeper than where water is first struck, to account for natural changes in water levels over time, especially during dry periods.</p>
+          </div>
+        </div>
+        <div class="step-block">
+          <div class="step-num-col"><div class="step-num">3</div><span class="step-tag">If rock</span></div>
+          <div class="step-content">
+            <h3>Drilling Through Rock</h3>
+            <p>If we hit hard rock before finding water, which is common in many areas, we switch techniques. A steel casing is fitted into the soft upper section, and we then switch to Air Percussion Drilling (APD). This uses compressed air to power a hammer drill that breaks through the rock. The air also carries the crushed rock pieces back up to the surface.</p>
+            <p>Water found in rock is typically very clean and clear, coming from deep natural fissures or cracks in the formation.</p>
+          </div>
+        </div>
+        <div class="step-block">
+          <div class="step-num-col"><div class="step-num">4</div><span class="step-tag">Critical</span></div>
+          <div class="step-content">
+            <h3>Developing the Hole</h3>
+            <p>Once drilling is complete, we pump high-pressure air into the hole to flush out all the chemical water and sediment left from the drilling process. We continue until the water running out of the hole is completely clear.</p>
+            <div class="step-critical"><strong>Why this step matters:</strong> Skipping it, or simply pumping out the mud, significantly reduces how much water your borehole can produce. We never cut corners here.</div>
+          </div>
+        </div>
+        <div class="step-block">
+          <div class="step-num-col"><div class="step-num">5</div></div>
+          <div class="step-content">
+            <h3>Pump Installation and Handover</h3>
+            <p>Before fitting the pump, we measure the borehole's flow rate and take a water sample for quality testing. This determines the right pump size for your borehole.</p>
+            <p>A stainless steel submersible pump is then lowered into the hole, suspended a couple of metres from the bottom. The electrical cable and water pipe run back up to the surface and are connected to a control box and valve. The top of the borehole is sealed with cement to prevent any surface water or contaminants from getting in.</p>
+            <p>If your borehole is on a lawn, we can fit a flush, green fibreglass cover over the top so it blends in and is protected from damage.</p>
+          </div>
+        </div>
+      </div>
+      <div style="margin-top:3rem;">
+        <button class="btn-primary" style="background:var(--navy);color:white;" onclick="showPage('main'); goTo('contact')">Get a Quote for Drilling &rarr;</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="logo.jpeg" alt="Borehole Man" /></div>
+          <div class="footer-tagline">"We do the &ldquo;hole&rdquo; job"</div>
+        </div>
+        <div class="footer-links">
+          <a href="tel:0822100454">082 210 0454 (Office)</a>
+          <a href="tel:0798459030">079 845 9030 (Dusty)</a>
+          <a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2025 Borehole Man. All rights reserved.</div>
+    </footer>
+  </div>
+
+
+  <!-- ===== MAINTENANCE PAGE ===== -->
+  <div class="page" id="page-maintenance">
+    <div class="detail-hero">
+      <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
+      <div class="section-label">Maintenance</div>
+      <h1 class="section-title">Why Borehole <span>Maintenance Matters</span></h1>
+      <p class="section-intro">Because a borehole is underground, it's easy to forget about it until something goes wrong. Regular servicing keeps your system running efficiently and prevents small issues from turning into expensive repairs.</p>
+    </div>
+    <div class="detail-body">
+      <div class="section-label">What We Do During a Service Visit</div>
+      <h2 class="section-title" style="margin-bottom:0.5rem;">Everything Checked, <span>Top to Bottom</span></h2>
+      <div class="service-items-grid">
+        <div class="service-item-card"><span class="item-icon">&#11014;&#65039;</span><h4>Pull and Inspect the Pump</h4><p>We remove the pump from the hole, inspect it for wear and check that it's operating correctly.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#128168;</span><h4>Blow the Hole Clean</h4><p>Using a compressor, we clear out sediment that builds up at the bottom of the borehole. Sediment that reaches the pump level will damage it.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#128269;</span><h4>Clean the Screens</h4><p>Iron deposits gradually build up on the slotted PVC screens inside the borehole. Left too long, this blocks water flow and reduces your yield. We clean these during every service.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#128202;</span><h4>Check Flow Rate and Water Quality</h4><p>We measure how much water the borehole is producing and check the quality. If anything looks unusual, like cloudy water, we investigate and resolve it before it causes damage.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#129295;</span><h4>Inspect Tanks and Pipework</h4><p>We check that storage tanks are clean and free of sediment, and inspect all pipes and fittings for leaks or wear.</p></div>
+      </div>
+      <div class="frequency-box">
+        <span class="freq-icon">&#128197;</span>
+        <div class="freq-text">
+          <h4>Recommended Frequency</h4>
+          <p>A full service at least once every 12 months keeps your borehole in good health and protects your investment in the pump and storage system.</p>
+        </div>
+      </div>
+      <div style="margin-top:3rem;">
+        <button class="btn-primary" style="background:var(--navy);color:white;" onclick="showPage('main'); goTo('contact')">Book a Service &rarr;</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="logo.jpeg" alt="Borehole Man" /></div>
+          <div class="footer-tagline">"We do the &ldquo;hole&rdquo; job"</div>
+        </div>
+        <div class="footer-links">
+          <a href="tel:0822100454">082 210 0454 (Office)</a>
+          <a href="tel:0798459030">079 845 9030 (Dusty)</a>
+          <a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2025 Borehole Man. All rights reserved.</div>
+    </footer>
+  </div>
+
+
+  <!-- ===== WATER STORAGE PAGE ===== -->
+  <div class="page" id="page-waterstorage">
+    <div class="detail-hero">
+      <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
+      <div class="section-label">Water Storage</div>
+      <h1 class="section-title">A Complete Water System, <span>Installed and Ready</span></h1>
+      <p class="section-intro">Everything from the borehole to your tap.</p>
+    </div>
+    <div class="detail-body">
+      <div class="storage-intro-text">
+        <p>Drilling a borehole is just the first step. To make that water accessible and usable throughout your property, you need a properly designed storage and distribution system. We supply and install the complete setup. You deal with one company, not multiple contractors.</p>
+      </div>
+      <div class="storage-list">
+        <h3>What's Included in a Full System</h3>
+        <div class="storage-item"><div class="storage-bullet">&#128167;</div><div class="storage-item-text"><strong>Borehole pump</strong><span>Draws water up from underground and feeds it into your storage system.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#129295;</div><div class="storage-item-text"><strong>Water storage tanks</strong><span>Sized to match your daily usage and household or property needs.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#9889;</div><div class="storage-item-text"><strong>Booster pump</strong><span>Pressurises the water so it flows properly through your home or property.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#128268;</div><div class="storage-item-text"><strong>Electrical switchgear and control board</strong><span>Automates the system and protects the pumps from damage.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#128295;</div><div class="storage-item-text"><strong>All pipework and fittings</strong><span>Everything needed to connect the borehole, tanks, and your property's water supply.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#129516;</div><div class="storage-item-text"><strong>Water filtration options</strong><span>Available where water quality requires treatment before use.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#127807;</div><div class="storage-item-text"><strong>Irrigation system design and installation</strong><span>If required for gardens or agricultural use.</span></div></div>
+      </div>
+      <div class="storage-closer">
+        <p>We've completed numerous water systems across the Western Cape, from private homes to estates and farms, all carried out with attention to detail and built to last.</p>
+      </div>
+      <div style="margin-top:3rem;">
+        <button class="btn-primary" style="background:var(--navy);color:white;" onclick="showPage('main'); goTo('contact')">Get a System Quote &rarr;</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="logo.jpeg" alt="Borehole Man" /></div>
+          <div class="footer-tagline">"We do the &ldquo;hole&rdquo; job"</div>
+        </div>
+        <div class="footer-links">
+          <a href="tel:0822100454">082 210 0454 (Office)</a>
+          <a href="tel:0798459030">079 845 9030 (Dusty)</a>
+          <a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2025 Borehole Man. All rights reserved.</div>
+    </footer>
+  </div>
+
+
+  <script>
+    function showPage(name) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page-' + name).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.getElementById('navLinks').classList.remove('open');
+    }
+    function goTo(id) {
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 60);
+    }
+    document.getElementById('hamburger').addEventListener('click', () => {
+      document.getElementById('navLinks').classList.toggle('open');
+    });
+    function handleSubmit(btn) {
+      btn.textContent = "Enquiry Sent! We'll be in touch soon.";
+      btn.style.background = '#3a4099';
+      btn.disabled = true;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+      });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.service-card, .why-card, .about-item, .proj-item, .service-item-card, .storage-item, .step-block').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
