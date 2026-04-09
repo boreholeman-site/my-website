@@ -276,6 +276,34 @@
     .freq-text h4 { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: white; margin-bottom: 0.4rem; }
     .freq-text p { font-size: 0.92rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
+    /* ── PUMP PAGE ── */
+    .pump-section { max-width: 800px; margin-bottom: 3.5rem; }
+    .pump-section h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 0.8rem; }
+    .pump-section p { font-size: 0.96rem; color: var(--text); line-height: 1.78; margin-bottom: 0.8rem; }
+    .pump-materials { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-top: 1rem; }
+    .pump-material { background: var(--sand); border-radius: 10px; padding: 1.2rem; border: 1px solid var(--border); border-top: 3px solid var(--navy); }
+    .pump-material strong { display: block; font-size: 0.88rem; font-weight: 700; color: var(--navy); margin-bottom: 0.3rem; }
+    .pump-material span { font-size: 0.82rem; color: var(--muted); line-height: 1.55; }
+
+    /* ── WATER QUALITY PAGE ── */
+    .wq-steps { max-width: 800px; margin-top: 2rem; }
+    .wq-step { display: flex; gap: 1.5rem; margin-bottom: 2rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); align-items: flex-start; }
+    .wq-step:last-child { border-bottom: none; }
+    .wq-num { width: 40px; height: 40px; border-radius: 50%; background: var(--navy); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 800; color: white; flex-shrink: 0; margin-top: 2px; }
+    .wq-step h4 { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: var(--navy); margin-bottom: 0.4rem; }
+    .wq-step p { font-size: 0.93rem; color: var(--text); line-height: 1.7; }
+    .wq-note { max-width: 800px; margin-top: 2rem; background: var(--sand); border-radius: 14px; padding: 1.5rem 2rem; border-left: 4px solid var(--navy); font-size: 0.95rem; color: var(--text); line-height: 1.75; }
+
+    /* ── IRRIGATION PAGE ── */
+    .irr-intro { max-width: 800px; font-size: 1.04rem; color: var(--text); line-height: 1.78; margin-bottom: 3rem; }
+    .irr-considerations { max-width: 800px; }
+    .irr-considerations h3 { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--navy); margin-bottom: 1.5rem; }
+    .irr-item { display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.1rem; }
+    .irr-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--navy); flex-shrink: 0; margin-top: 8px; }
+    .irr-item p { font-size: 0.95rem; color: var(--text); line-height: 1.7; }
+    .irr-item p strong { color: var(--navy); }
+    .irr-closer { max-width: 800px; margin-top: 3rem; background: var(--sand); border-radius: 14px; padding: 1.5rem 2rem; border-left: 4px solid var(--navy); font-size: 0.95rem; color: var(--text); line-height: 1.75; }
+
     /* ── WATER STORAGE ── */
     .storage-intro-text p { font-size: 1.04rem; color: var(--text); line-height: 1.78; margin-bottom: 1rem; max-width: 800px; }
     .storage-list { margin-top: 3rem; max-width: 800px; }
@@ -392,10 +420,11 @@
           <p>Domestic and commercial borehole drilling throughout the Southern Suburbs and greater Cape Town region. Experienced in all Western Cape drilling conditions.</p>
           <span class="card-link">How drilling works &rarr;</span>
         </div>
-        <div class="service-card">
+        <div class="service-card" onclick="showPage('pump')">
           <div class="service-icon">&#9881;&#65039;</div>
           <h3>Pump Installation</h3>
           <p>Supply and installation of borehole pumps, booster pumps, and all associated electrical switchgear. Full pump solutions tailored to your water needs.</p>
+          <span class="card-link">How we spec your pump &rarr;</span>
         </div>
         <div class="service-card" onclick="showPage('maintenance')">
           <div class="service-icon">&#128295;</div>
@@ -409,15 +438,17 @@
           <p>Complete water storage solutions including tanks, booster pumps, and all pipework. We design systems that keep clean water flowing around the clock.</p>
           <span class="card-link">Full system details &rarr;</span>
         </div>
-        <div class="service-card">
+        <div class="service-card" onclick="showPage('waterquality')">
           <div class="service-icon">&#129516;</div>
           <h3>Water Quality Testing</h3>
           <p>We monitor and test water quality, identify inconsistencies such as cloudiness or iron content, and take action before problems affect your system.</p>
+          <span class="card-link">How testing works &rarr;</span>
         </div>
-        <div class="service-card">
+        <div class="service-card" onclick="showPage('irrigation')">
           <div class="service-icon">&#127807;</div>
           <h3>Irrigation Systems</h3>
           <p>Irrigation design and installation using borehole water. Ideal for estates, golf courses, farms, and large residential properties.</p>
+          <span class="card-link">How we design your system &rarr;</span>
         </div>
       </div>
     </section>
@@ -558,7 +589,7 @@
       <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
       <div class="section-label">Borehole Drilling</div>
       <h1 class="section-title">How the <span>Drilling Process</span> Works</h1>
-      <p class="section-intro">Drilling a borehole is a detailed process that takes careful planning and the right equipment. Here's exactly what happens on your property from start to finish, explained in plain language.</p>
+      <p class="section-intro">Drilling a borehole is a detailed process that takes the right equipment, technique and experience. Here's exactly what happens on your property from start to finish.</p>
     </div>
     <div class="detail-body">
       <div class="steps-container">
@@ -566,40 +597,41 @@
           <div class="step-num-col"><div class="step-num">1</div><span class="step-tag">Setup</span></div>
           <div class="step-content">
             <h3>Rig Setup</h3>
-            <p>Our team arrives and sets up the drilling rig and equipment on your property. This typically takes up to half a day. We'll dig small flow pits alongside the rig to collect water and debris during drilling.</p>
+            <p>Our team arrives and sets up the drilling rig and all equipment on your property. This typically takes a full day. Where mud drilling is required, we dig a mud pit alongside the rig. This pit circulates water throughout the drilling process, which stabilises the hole and collects the debris brought to the surface.</p>
           </div>
         </div>
         <div class="step-block">
           <div class="step-num-col"><div class="step-num">2</div></div>
           <div class="step-content">
             <h3>Drilling Through the Top Layer</h3>
-            <p>In the Cape Peninsula, the ground surface is made up of sand, clay and loose gravel, which means we start with a specialist technique called Rotary Mud Drilling (RMD). We flush water down the hole as we drill, which carries the debris back up to the surface and prevents the hole from collapsing. A chemical is added to the water to help with this.</p>
-            <p>If water is found during this stage, we'll case (line) the hole with a strong PVC sleeve. The bottom portion of this sleeve is slotted to allow water to flow in, while keeping sand and clay out. We always drill a bit deeper than where water is first struck, to account for natural changes in water levels over time, especially during dry periods.</p>
+            <p>In the Cape Peninsula, the ground surface consists of sand, clay and loose gravel. We use a specialist technique called Rotary Mud Drilling (RMD). Water is flushed down the hole as we drill, carrying debris back to the surface and preventing the hole from collapsing. A food-grade chemical is added to the water to help stabilise the hole walls.</p>
+            <p>If water is found at this stage, we case (line) the hole with a PVC sleeve. The lower section is precision-perforated using a specialist cutting machine, allowing water to flow in while keeping sand and clay out. We always drill a little deeper than where water is first found, to account for natural water level changes, especially during dry periods.</p>
           </div>
         </div>
         <div class="step-block">
           <div class="step-num-col"><div class="step-num">3</div><span class="step-tag">If rock</span></div>
           <div class="step-content">
             <h3>Drilling Through Rock</h3>
-            <p>If we hit hard rock before finding water, which is common in many areas, we switch techniques. A steel casing is fitted into the soft upper section, and we then switch to Air Percussion Drilling (APD). This uses compressed air to power a hammer drill that breaks through the rock. The air also carries the crushed rock pieces back up to the surface.</p>
-            <p>Water found in rock is typically very clean and clear, coming from deep natural fissures or cracks in the formation.</p>
+            <p>If we hit hard rock before finding water, which is common in many parts of the Cape, we switch to Air Percussion Drilling (APD). A steel casing is first fitted into the soft upper section of the hole, and then a hammer drill powered by compressed air breaks through the rock. The air also carries the crushed rock pieces back up to the surface.</p>
+            <p>Water found in rock is typically very clean and clear, drawn from deep natural fissures in the formation.</p>
           </div>
         </div>
         <div class="step-block">
           <div class="step-num-col"><div class="step-num">4</div><span class="step-tag">Critical</span></div>
           <div class="step-content">
             <h3>Developing the Hole</h3>
-            <p>Once drilling is complete, we pump high-pressure air into the hole to flush out all the chemical water and sediment left from the drilling process. We continue until the water running out of the hole is completely clear.</p>
-            <div class="step-critical"><strong>Why this step matters:</strong> Skipping it, or simply pumping out the mud, significantly reduces how much water your borehole can produce. We never cut corners here.</div>
+            <p>Once drilling is complete, we use a compressor to blast high-pressure air down the hole. This flushes out all the drilling water and sediment, and allows us to take an accurate flow rate reading so we can correctly specify the right pump for your borehole.</p>
+            <div class="step-critical"><strong>Why this step matters:</strong> Skipping this step causes pump damage and early failure, and means we can't correctly size your pump. We never skip it.</div>
           </div>
         </div>
         <div class="step-block">
           <div class="step-num-col"><div class="step-num">5</div></div>
           <div class="step-content">
             <h3>Pump Installation and Handover</h3>
-            <p>Before fitting the pump, we measure the borehole's flow rate and take a water sample for quality testing. This determines the right pump size for your borehole.</p>
-            <p>A stainless steel submersible pump is then lowered into the hole, suspended a couple of metres from the bottom. The electrical cable and water pipe run back up to the surface and are connected to a control box and valve. The top of the borehole is sealed with cement to prevent any surface water or contaminants from getting in.</p>
-            <p>If your borehole is on a lawn, we can fit a flush, green fibreglass cover over the top so it blends in and is protected from damage.</p>
+            <p>With an accurate flow reading from Step 4, we can specify exactly the right pump for your borehole. We measure the flow rate and take a water sample for quality testing before the pump goes in.</p>
+            <p>A stainless steel submersible pump is lowered into the hole and suspended approximately 2 metres from the bottom. This gap is intentional. It allows any sediment to settle at the bottom without being drawn into the pump. The submersible cable and HDPE pipe run back to the surface and connect to a control box and regulating valve.</p>
+            <p>The borehole is finished with a manhole cover or garden box to keep foreign objects out. If it's on a lawn, we can fit a flush green fibreglass cover so it blends in completely.</p>
+            <p>We only use quality materials throughout: HDPE riser pipe, minimum 2.5mm² submersible cable, a strong safety rope, and compression fittings. This matters when the pump needs to come out for servicing. Done right, it always comes out safely.</p>
           </div>
         </div>
       </div>
@@ -629,24 +661,25 @@
     <div class="detail-hero">
       <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
       <div class="section-label">Maintenance</div>
-      <h1 class="section-title">Why Borehole <span>Maintenance Matters</span></h1>
-      <p class="section-intro">Because a borehole is underground, it's easy to forget about it until something goes wrong. Regular servicing keeps your system running efficiently and prevents small issues from turning into expensive repairs.</p>
+      <h1 class="section-title">Protect Your Investment, <span>Service Annually</span></h1>
+      <p class="section-intro">Because a borehole is underground, it's easy to forget about it until something goes wrong. Annual servicing keeps your system running efficiently, extends the life of your equipment, and catches small problems before they become costly ones.</p>
     </div>
     <div class="detail-body">
-      <div class="section-label">What We Do During a Service Visit</div>
+      <div class="section-label">What We Do on Every Service Visit</div>
       <h2 class="section-title" style="margin-bottom:0.5rem;">Everything Checked, <span>Top to Bottom</span></h2>
       <div class="service-items-grid">
-        <div class="service-item-card"><span class="item-icon">&#11014;&#65039;</span><h4>Pull and Inspect the Pump</h4><p>We remove the pump from the hole, inspect it for wear and check that it's operating correctly.</p></div>
-        <div class="service-item-card"><span class="item-icon">&#128168;</span><h4>Blow the Hole Clean</h4><p>Using a compressor, we clear out sediment that builds up at the bottom of the borehole. Sediment that reaches the pump level will damage it.</p></div>
-        <div class="service-item-card"><span class="item-icon">&#128269;</span><h4>Clean the Screens</h4><p>Iron deposits gradually build up on the slotted PVC screens inside the borehole. Left too long, this blocks water flow and reduces your yield. We clean these during every service.</p></div>
-        <div class="service-item-card"><span class="item-icon">&#128202;</span><h4>Check Flow Rate and Water Quality</h4><p>We measure how much water the borehole is producing and check the quality. If anything looks unusual, like cloudy water, we investigate and resolve it before it causes damage.</p></div>
-        <div class="service-item-card"><span class="item-icon">&#129295;</span><h4>Inspect Tanks and Pipework</h4><p>We check that storage tanks are clean and free of sediment, and inspect all pipes and fittings for leaks or wear.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#11014;&#65039;</span><h4>Pull and Inspect the Pump</h4><p>We remove the pump from the hole and inspect it for wear. This is also when we check the cable, safety rope and all fittings.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#128168;</span><h4>Blow the Hole Clean</h4><p>Using a compressor, we clear sediment that builds up at the bottom. If sediment reaches the pump level, it will cause damage. Regular clearing prevents this.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#128269;</span><h4>Clean the Screens</h4><p>We use a specialised tool that blows air sideways to unblock the perforations in the PVC sleeve. Iron deposits build up over time and restrict water flow. This keeps them clear.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#128202;</span><h4>Check Flow Rate and Water Quality</h4><p>Flow can change with the seasons. We measure output and check for any unusual signs, like cloudiness or excess sediment, and advise on the best solution before reinstalling the pump.</p></div>
+        <div class="service-item-card"><span class="item-icon">&#129295;</span><h4>Inspect Tanks and Pipework</h4><p>We check that storage tanks are clean, and inspect all pipes and fittings for leaks or deterioration.</p></div>
       </div>
+      <p style="font-size:0.95rem; color:var(--muted); line-height:1.7; max-width:700px; margin-top:2rem;">Regular servicing also means longer equipment life. A well-maintained pump and system will outlast a neglected one by many years.</p>
       <div class="frequency-box">
         <span class="freq-icon">&#128197;</span>
         <div class="freq-text">
           <h4>Recommended Frequency</h4>
-          <p>A full service at least once every 12 months keeps your borehole in good health and protects your investment in the pump and storage system.</p>
+          <p>At least once every 12 months. If your borehole is your primary water source, we recommend not leaving it longer than that.</p>
         </div>
       </div>
       <div style="margin-top:3rem;">
@@ -675,28 +708,176 @@
     <div class="detail-hero">
       <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
       <div class="section-label">Water Storage</div>
-      <h1 class="section-title">A Complete Water System, <span>Installed and Ready</span></h1>
-      <p class="section-intro">Everything from the borehole to your tap.</p>
+      <h1 class="section-title">A Complete Water System, <span>From the Ground to Your Tap</span></h1>
+      <p class="section-intro">The right setup makes everything simple.</p>
     </div>
     <div class="detail-body">
       <div class="storage-intro-text">
-        <p>Drilling a borehole is just the first step. To make that water accessible and usable throughout your property, you need a properly designed storage and distribution system. We supply and install the complete setup. You deal with one company, not multiple contractors.</p>
+        <p>Borehole pumps are designed to fill a storage tank, not to supply a house or irrigation system directly. The correct setup is a storage tank filled by your borehole pump, with a separate booster pump to distribute water at the right pressure to where it's needed. This gives you a reliable, hassle-free system that protects both pumps and keeps water flowing consistently.</p>
+        <p>We supply and install the complete system. You deal with one company, not multiple contractors.</p>
       </div>
       <div class="storage-list">
-        <h3>What's Included in a Full System</h3>
-        <div class="storage-item"><div class="storage-bullet">&#128167;</div><div class="storage-item-text"><strong>Borehole pump</strong><span>Draws water up from underground and feeds it into your storage system.</span></div></div>
-        <div class="storage-item"><div class="storage-bullet">&#129295;</div><div class="storage-item-text"><strong>Water storage tanks</strong><span>Sized to match your daily usage and household or property needs.</span></div></div>
-        <div class="storage-item"><div class="storage-bullet">&#9889;</div><div class="storage-item-text"><strong>Booster pump</strong><span>Pressurises the water so it flows properly through your home or property.</span></div></div>
-        <div class="storage-item"><div class="storage-bullet">&#128268;</div><div class="storage-item-text"><strong>Electrical switchgear and control board</strong><span>Automates the system and protects the pumps from damage.</span></div></div>
-        <div class="storage-item"><div class="storage-bullet">&#128295;</div><div class="storage-item-text"><strong>All pipework and fittings</strong><span>Everything needed to connect the borehole, tanks, and your property's water supply.</span></div></div>
-        <div class="storage-item"><div class="storage-bullet">&#129516;</div><div class="storage-item-text"><strong>Water filtration options</strong><span>Available where water quality requires treatment before use.</span></div></div>
-        <div class="storage-item"><div class="storage-bullet">&#127807;</div><div class="storage-item-text"><strong>Irrigation system design and installation</strong><span>If required for gardens or agricultural use.</span></div></div>
+        <h3>What's Included</h3>
+        <div class="storage-item"><div class="storage-bullet">&#129295;</div><div class="storage-item-text"><strong>Storage tanks</strong><span>Tank size is matched to your borehole's flow rate and your daily water usage. We make sure your tank is big enough to meet your needs without oversizing unnecessarily.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#128167;</div><div class="storage-item-text"><strong>Booster pump</strong><span>Sized to match the demand from your household or irrigation system. The booster distributes water at the right pressure throughout your property.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#9889;</div><div class="storage-item-text"><strong>Electrical and automation</strong><span>A fully automated control system manages the borehole pump and booster pump. It also protects both pumps from dry-running, one of the most common causes of pump failure.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#129516;</div><div class="storage-item-text"><strong>Water treatment</strong><span>We take a water sample so we can design the right treatment system for your borehole's specific water. Every borehole is different. Treatment is tailored to your results, not a one-size-fits-all solution.</span></div></div>
+        <div class="storage-item"><div class="storage-bullet">&#127807;</div><div class="storage-item-text"><strong>Irrigation</strong><span>If needed, we design and install an irrigation system tailored to your garden or landscaped area, with separate zones and timing for different plant types and water requirements.</span></div></div>
       </div>
       <div class="storage-closer">
-        <p>We've completed numerous water systems across the Western Cape, from private homes to estates and farms, all carried out with attention to detail and built to last.</p>
+        <p>We work on residential properties, large estates and commercial sites. Whatever the scale, the same attention to detail applies.</p>
       </div>
       <div style="margin-top:3rem;">
         <button class="btn-primary" onclick="showPage('main'); goTo('contact')">Get a System Quote &rarr;</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="/logo.jpeg" alt="Borehole Man" /></div>
+          <div class="footer-tagline">"We do the &ldquo;hole&rdquo; job"</div>
+        </div>
+        <div class="footer-links">
+          <a href="tel:0822100454">082 210 0454 (Office)</a>
+          <a href="tel:0798459030">079 845 9030 (Dusty)</a>
+          <a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2025 Borehole Man. All rights reserved.</div>
+    </footer>
+  </div>
+
+
+  <!-- ===== PUMP PAGE ===== -->
+  <div class="page" id="page-pump">
+    <div class="detail-hero">
+      <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
+      <div class="section-label">Pump Installation</div>
+      <h1 class="section-title">The Right Pump, <span>Installed the Right Way</span></h1>
+      <p class="section-intro">No two boreholes are the same. Every borehole has its own depth, flow rate and water characteristics. Fitting the wrong pump will result in it failing well before it should.</p>
+    </div>
+    <div class="detail-body">
+      <div class="pump-section">
+        <h3>How We Spec Your Pump</h3>
+        <p>Using the borehole's flow rate and depth, we work off the pump's performance curve to find the correct match. A pump that's oversized or undersized for the hole will wear out quickly and waste energy. Getting this right at installation is what gives your pump a long, reliable service life.</p>
+        <p>We size every pump individually using the flow data collected during the development stage (Step 4 of drilling). This is why that step is non-negotiable.</p>
+      </div>
+      <div class="pump-section">
+        <h3>The Brands We Use</h3>
+        <p>We exclusively use Italian-manufactured pumps, well regarded for their quality and longevity in borehole applications. Our entry-level range is already Italian-made, and for clients wanting top-of-the-range performance, we can supply premium options to match.</p>
+      </div>
+      <div class="pump-section">
+        <h3>Installation Materials</h3>
+        <p>We only use quality materials throughout. This matters when the pump needs to come out for servicing. Done right, it always comes out safely.</p>
+        <div class="pump-materials">
+          <div class="pump-material"><strong>HDPE riser pipe</strong><span>Durable, flexible and safe for drinking water. The correct pipe for borehole applications.</span></div>
+          <div class="pump-material"><strong>2.5mm² submersible cable</strong><span>Minimum specification cable rated for permanent submersion. No shortcuts on this.</span></div>
+          <div class="pump-material"><strong>Safety rope</strong><span>A strong safety rope is always attached to the pump. When it's time for a service, the pump comes out safely every time.</span></div>
+          <div class="pump-material"><strong>Compression fittings</strong><span>Secure, leak-free connections throughout. No push-fit shortcuts underground.</span></div>
+        </div>
+      </div>
+      <div style="margin-top:3rem;">
+        <button class="btn-primary" onclick="showPage('main'); goTo('contact')">Get a Quote &rarr;</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="/logo.jpeg" alt="Borehole Man" /></div>
+          <div class="footer-tagline">"We do the &ldquo;hole&rdquo; job"</div>
+        </div>
+        <div class="footer-links">
+          <a href="tel:0822100454">082 210 0454 (Office)</a>
+          <a href="tel:0798459030">079 845 9030 (Dusty)</a>
+          <a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2025 Borehole Man. All rights reserved.</div>
+    </footer>
+  </div>
+
+
+  <!-- ===== WATER QUALITY PAGE ===== -->
+  <div class="page" id="page-waterquality">
+    <div class="detail-hero">
+      <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
+      <div class="section-label">Water Quality</div>
+      <h1 class="section-title">Know What's in Your Water <span>Before Using It</span></h1>
+      <p class="section-intro">Borehole water is naturally occurring and varies significantly from one location to the next. Before using your borehole water inside your home for drinking, cooking or washing, it's essential to have it tested so we can design the right treatment system for your specific results.</p>
+    </div>
+    <div class="detail-body">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title" style="margin-bottom:1.5rem;">Three Steps to <span>Clean, Safe Water</span></h2>
+      <div class="wq-steps">
+        <div class="wq-step">
+          <div class="wq-num">1</div>
+          <div>
+            <h4>Water Sample Taken at Installation</h4>
+            <p>Once your borehole is drilled and developed, we take a water sample and send it to an accredited laboratory for full analysis.</p>
+          </div>
+        </div>
+        <div class="wq-step">
+          <div class="wq-num">2</div>
+          <div>
+            <h4>Results in 2 to 3 Weeks</h4>
+            <p>Lab results typically take 2 to 3 weeks. The results tell us exactly what's in the water: minerals, iron content, bacteria, pH and more.</p>
+          </div>
+        </div>
+        <div class="wq-step">
+          <div class="wq-num">3</div>
+          <div>
+            <h4>Treatment System Designed for Your Results</h4>
+            <p>Once we have the results, we design a filtration and treatment system specific to your borehole. We can't quote on treatment before the results are in. Every borehole is different and a generic system may not be adequate or may be unnecessary.</p>
+          </div>
+        </div>
+      </div>
+      <div class="wq-note">
+        For garden irrigation or topping up a pool, testing isn't always required. But for any water going into your home, we always recommend a full lab analysis first.
+      </div>
+      <div style="margin-top:3rem;">
+        <button class="btn-primary" onclick="showPage('main'); goTo('contact')">Get in Touch &rarr;</button>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo"><img src="/logo.jpeg" alt="Borehole Man" /></div>
+          <div class="footer-tagline">"We do the &ldquo;hole&rdquo; job"</div>
+        </div>
+        <div class="footer-links">
+          <a href="tel:0822100454">082 210 0454 (Office)</a>
+          <a href="tel:0798459030">079 845 9030 (Dusty)</a>
+          <a href="mailto:sales@boreholeman.co.za">sales@boreholeman.co.za</a>
+        </div>
+      </div>
+      <div class="footer-copy">&copy; 2025 Borehole Man. All rights reserved.</div>
+    </footer>
+  </div>
+
+
+  <!-- ===== IRRIGATION PAGE ===== -->
+  <div class="page" id="page-irrigation">
+    <div class="detail-hero">
+      <button class="back-btn" onclick="showPage('main'); goTo('services')">&larr; Back to Services</button>
+      <div class="section-label">Irrigation</div>
+      <h1 class="section-title">A Custom Irrigation System <span>Designed for Your Garden</span></h1>
+      <p class="section-intro">A well-designed irrigation system does more than just water your garden. It delivers the right amount of water to the right areas at the right time. We design every system specifically around your garden layout, plant types and watering needs.</p>
+    </div>
+    <div class="detail-body">
+      <div class="irr-considerations">
+        <h3>What We Consider in the Design</h3>
+        <div class="irr-item"><div class="irr-dot"></div><p><strong>Garden size and layout,</strong> including paths, beds, lawn areas and any landscaped zones.</p></div>
+        <div class="irr-item"><div class="irr-dot"></div><p><strong>Plant types.</strong> Lawns, flower beds, shrubs and trees all have different water requirements.</p></div>
+        <div class="irr-item"><div class="irr-dot"></div><p><strong>Zone separation.</strong> Different areas run on independent schedules so each gets exactly what it needs.</p></div>
+        <div class="irr-item"><div class="irr-dot"></div><p><strong>Sprinkler and drip selection.</strong> The right heads for each area to avoid over- or under-watering.</p></div>
+        <div class="irr-item"><div class="irr-dot"></div><p><strong>Timer and automation.</strong> Set it and forget it, with full control over frequency and duration.</p></div>
+        <div class="irr-item"><div class="irr-dot"></div><p><strong>Integration with your borehole and storage system</strong> so everything works together as one system.</p></div>
+      </div>
+      <div class="irr-closer">
+        A properly designed irrigation system also protects your borehole pump by ensuring water demand never exceeds your borehole's output. We always design within your system's capacity.
+      </div>
+      <div style="margin-top:3rem;">
+        <button class="btn-primary" onclick="showPage('main'); goTo('contact')">Get a Quote &rarr;</button>
       </div>
     </div>
     <footer>
@@ -730,24 +911,4 @@
       }, 60);
     }
     document.getElementById('hamburger').addEventListener('click', () => {
-      document.getElementById('navLinks').classList.toggle('open');
-    });
-    function handleSubmit(btn) {
-      btn.textContent = "Enquiry Sent! We'll be in touch soon.";
-      btn.style.background = '#3a4099';
-      btn.disabled = true;
-    }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
-      });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.service-card, .why-card, .about-item, .proj-item, .service-item-card, .storage-item, .step-block').forEach(el => {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(20px)';
-      el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-      observer.observe(el);
-    });
-  </script>
-</body>
-</html>
+      document.get
