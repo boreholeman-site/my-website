@@ -899,16 +899,19 @@
 
   <script>
     function showPage(name) {
-      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-      document.getElementById('page-' + name).classList.add('active');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      document.getElementById('navLinks').classList.remove('open');
-    }
-    function goTo(id) {
-      setTimeout(() => {
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth' });
-      }, 60);
-    }
-    document.getElementById('hamburger').addEventListener('click', () => {
-      document.get
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + name).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  document.getElementById('navLinks').classList.remove('open');
+}
+
+function goTo(id) {
+  setTimeout(() => {
+    const el = document.getElementById(id);
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+  }, 60);
+}
+
+document.getElementById('hamburger').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
