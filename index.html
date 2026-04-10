@@ -66,11 +66,16 @@
     /* ── HERO ── */
     #home {
       min-height: 100vh;
-      background: linear-gradient(150deg, #f8f9ff 0%, #eef0f8 50%, #e8eaf5 100%);
+      background: url('/Hero.jpeg') center/cover no-repeat;
       display: flex; align-items: center;
       position: relative; overflow: hidden;
       padding: 8rem 5% 5rem;
     }
+    #home::before {
+ .hero-content {
+  position: relative;
+  z-index: 2;
+}
     .hero-bg { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
     .hero-line {
       position: absolute; height: 1px;
